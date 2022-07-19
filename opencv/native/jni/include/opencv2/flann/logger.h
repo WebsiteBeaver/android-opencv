@@ -31,8 +31,6 @@
 #ifndef OPENCV_FLANN_LOGGER_H
 #define OPENCV_FLANN_LOGGER_H
 
-//! @cond IGNORED
-
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -133,7 +131,5 @@ private:
 };
 
 }
-
-//! @endcond
 
 #endif //OPENCV_FLANN_LOGGER_H

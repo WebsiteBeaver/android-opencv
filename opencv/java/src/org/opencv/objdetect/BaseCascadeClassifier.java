@@ -6,6 +6,7 @@ package org.opencv.objdetect;
 import org.opencv.core.Algorithm;
 
 // C++: class BaseCascadeClassifier
+//javadoc: BaseCascadeClassifier
 
 public class BaseCascadeClassifier extends Algorithm {
 

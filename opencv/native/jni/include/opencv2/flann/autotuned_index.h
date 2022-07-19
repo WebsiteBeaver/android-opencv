@@ -30,10 +30,9 @@
 #ifndef OPENCV_FLANN_AUTOTUNED_INDEX_H_
 #define OPENCV_FLANN_AUTOTUNED_INDEX_H_
 
-//! @cond IGNORED
-
 #include <sstream>
 
+#include "general.h"
 #include "nn_index.h"
 #include "ground_truth.h"
 #include "index_testing.h"
@@ -496,7 +495,7 @@ private:
         const int nn = 1;
         const size_t SAMPLE_COUNT = 1000;
 
-        CV_Assert(bestIndex_ != NULL && "Requires a valid index"); // must have a valid index
+        assert(bestIndex_ != NULL); // must have a valid index
 
         float speedup = 0;
 
@@ -588,7 +587,5 @@ private:
 
 };
 }
-
-//! @endcond
 
 #endif /* OPENCV_FLANN_AUTOTUNED_INDEX_H_ */

@@ -1,5 +1,7 @@
 package org.opencv.imgproc;
 
+import java.lang.Math;
+
 //javadoc:Moments
 public class Moments {
 

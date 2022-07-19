@@ -46,7 +46,6 @@
 
 #include <complex>
 #include <ostream>
-#include <sstream>
 
 //! @cond IGNORED
 
@@ -73,6 +72,12 @@ public:
 
     typedef Vec<channel_type, channels> vec_type;
 };
+
+static inline
+std::ostream& operator << (std::ostream& os, const String& str)
+{
+    return os << str.c_str();
+}
 
 static inline
 std::ostream& operator << (std::ostream& out, Ptr<Formatted> fmtd)

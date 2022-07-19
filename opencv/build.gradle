@@ -58,7 +58,7 @@
 //
 // - Use find_package() in app/CMakeLists.txt:
 //
-//   find_package(OpenCV 4.5 REQUIRED java)
+//   find_package(OpenCV 3.4 REQUIRED java)
 //   ...
 //   target_link_libraries(native-lib ${OpenCV_LIBRARIES})
 //
@@ -96,42 +96,26 @@ plugins {
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
-def openCVersionName = "4.5.5"
-def openCVersionCode = ((4 * 100 + 5) * 100 + 5) * 10 + 0
-
-println "OpenCV: " +openCVersionName + " " + project.buildscript.sourceFile
+println "OpenCV: " + project.buildscript.sourceFile
 
 android {
     compileSdkVersion 30
+    //buildToolsVersion "x.y.z" // not needed since com.android.tools.build:gradle:3.0.0
 
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-
-        versionCode openCVersionCode
-        versionName openCVersionName
-
-        externalNativeBuild {
-            cmake {
-                arguments "-DANDROID_STL=c++_shared"
-                targets "opencv_jni_shared"
-            }
-        }
     }
 
     buildTypes {
-        debug {
-            packagingOptions {
-                doNotStrip '**/*.so'  // controlled by OpenCV CMake scripts
-            }
-        }
         release {
-            packagingOptions {
-                doNotStrip '**/*.so'  // controlled by OpenCV CMake scripts
-            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
     }
 
     sourceSets {
@@ -141,12 +125,6 @@ android {
             aidl.srcDirs = ['java/src']
             res.srcDirs = ['java/res']
             manifest.srcFile 'java/AndroidManifest.xml'
-        }
-    }
-
-    externalNativeBuild {
-        cmake {
-            path (project.projectDir.toString() + '/libcxx_helper/CMakeLists.txt')
         }
     }
 
@@ -166,7 +144,7 @@ publishing {
         release(MavenPublication) {
             groupId = "com.websitebeaver"
             artifactId = "opencv"
-            version = "4.5.5"
+            version = "4.1.0"
 
             afterEvaluate {
                 from components.release

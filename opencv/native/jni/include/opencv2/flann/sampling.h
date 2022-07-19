@@ -30,8 +30,6 @@
 #ifndef OPENCV_FLANN_SAMPLING_H_
 #define OPENCV_FLANN_SAMPLING_H_
 
-//! @cond IGNORED
-
 #include "matrix.h"
 #include "random.h"
 
@@ -79,6 +77,5 @@ Matrix<T> random_sample(const Matrix<T>& srcMatrix, size_t size)
 
 } // namespace
 
-//! @endcond
 
 #endif /* OPENCV_FLANN_SAMPLING_H_ */

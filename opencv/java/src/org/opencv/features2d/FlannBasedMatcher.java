@@ -7,14 +7,8 @@ import org.opencv.features2d.DescriptorMatcher;
 import org.opencv.features2d.FlannBasedMatcher;
 
 // C++: class FlannBasedMatcher
-/**
- * Flann-based descriptor matcher.
- *
- * This matcher trains cv::flann::Index on a train descriptor collection and calls its nearest search
- * methods to find the best matches. So, this matcher may be faster when matching a large train
- * collection than the brute force matcher. FlannBasedMatcher does not support masking permissible
- * matches of descriptor sets because flann::Index does not support this. :
- */
+//javadoc: FlannBasedMatcher
+
 public class FlannBasedMatcher extends DescriptorMatcher {
 
     protected FlannBasedMatcher(long addr) { super(addr); }
@@ -26,8 +20,13 @@ public class FlannBasedMatcher extends DescriptorMatcher {
     // C++:   cv::FlannBasedMatcher::FlannBasedMatcher(Ptr_flann_IndexParams indexParams = makePtr<flann::KDTreeIndexParams>(), Ptr_flann_SearchParams searchParams = makePtr<flann::SearchParams>())
     //
 
-    public FlannBasedMatcher() {
-        super(FlannBasedMatcher_0());
+    //javadoc: FlannBasedMatcher::FlannBasedMatcher()
+    public   FlannBasedMatcher()
+    {
+        
+        super( FlannBasedMatcher_0() );
+        
+        return;
     }
 
 
@@ -35,8 +34,13 @@ public class FlannBasedMatcher extends DescriptorMatcher {
     // C++: static Ptr_FlannBasedMatcher cv::FlannBasedMatcher::create()
     //
 
-    public static FlannBasedMatcher create() {
-        return FlannBasedMatcher.__fromPtr__(create_0());
+    //javadoc: FlannBasedMatcher::create()
+    public static FlannBasedMatcher create()
+    {
+        
+        FlannBasedMatcher retVal = FlannBasedMatcher.__fromPtr__(create_0());
+        
+        return retVal;
     }
 
 

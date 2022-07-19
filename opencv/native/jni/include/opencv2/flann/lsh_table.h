@@ -35,8 +35,6 @@
 #ifndef OPENCV_FLANN_LSH_TABLE_H_
 #define OPENCV_FLANN_LSH_TABLE_H_
 
-//! @cond IGNORED
-
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
@@ -57,12 +55,6 @@
 
 #include "dynamic_bitset.h"
 #include "matrix.h"
-
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable: 4702) //disable unreachable code
-#endif
-
 
 namespace cvflann
 {
@@ -168,7 +160,8 @@ public:
     {
         feature_size_ = feature_size;
         CV_UNUSED(key_size);
-        CV_Error(cv::Error::StsUnsupportedFormat, "LSH is not implemented for that type" );
+        std::cerr << "LSH is not implemented for that type" << std::endl;
+        assert(0);
     }
 
     /** Add a feature to the table
@@ -248,8 +241,9 @@ public:
      */
     size_t getKey(const ElementType* /*feature*/) const
     {
-        CV_Error(cv::Error::StsUnsupportedFormat, "LSH is not implemented for that type" );
-        return 0;
+        std::cerr << "LSH is not implemented for that type" << std::endl;
+        assert(0);
+        return 1;
     }
 
     /** Get statistics about the table
@@ -514,12 +508,6 @@ inline LshStats LshTable<unsigned char>::getStats() const
 }
 }
 
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//! @endcond
 
 #endif /* OPENCV_FLANN_LSH_TABLE_H_ */

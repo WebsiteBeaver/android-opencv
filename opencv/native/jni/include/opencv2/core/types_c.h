@@ -44,10 +44,8 @@
 #ifndef OPENCV_CORE_TYPES_H
 #define OPENCV_CORE_TYPES_H
 
-#ifdef CV__ENABLE_C_API_CTORS  // invalid C API ctors (must be removed)
-#if defined(_WIN32) && !defined(CV__SKIP_MESSAGE_MALFORMED_C_API_CTORS)
-#error "C API ctors don't work on Win32: https://github.com/opencv/opencv/issues/15990"
-#endif
+#if !defined(__OPENCV_BUILD) && !defined(CV__DISABLE_C_API_CTORS)
+#define CV__ENABLE_C_API_CTORS // enable C API ctors (must be removed)
 #endif
 
 //#define CV__VALIDATE_UNUNITIALIZED_VARS 1  // C++11 & GCC only
@@ -358,11 +356,7 @@ _IplImage
                                needed for correct deallocation */
 
 #if defined(CV__ENABLE_C_API_CTORS) && defined(__cplusplus)
-    _IplImage()
-    {
-        memset(this, 0, sizeof(*this));  // valid for POD structure
-        nSize = sizeof(IplImage);
-    }
+    _IplImage() {}
     _IplImage(const cv::Mat& m) { *this = cvIplImage(m); }
 #endif
 }

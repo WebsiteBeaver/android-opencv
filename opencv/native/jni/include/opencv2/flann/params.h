@@ -30,8 +30,6 @@
 #ifndef OPENCV_FLANN_PARAMS_H_
 #define OPENCV_FLANN_PARAMS_H_
 
-//! @cond IGNORED
-
 #include "any.h"
 #include "general.h"
 #include <iostream>
@@ -47,26 +45,12 @@ struct SearchParams : public IndexParams
 {
     SearchParams(int checks = 32, float eps = 0, bool sorted = true )
     {
-        init(checks, eps, sorted, false);
-    }
-
-    SearchParams(int checks, float eps, bool sorted, bool explore_all_trees )
-    {
-        init(checks, eps, sorted, explore_all_trees);
-    }
-
-    void init(int checks = 32, float eps = 0, bool sorted = true, bool explore_all_trees = false )
-    {
         // how many leafs to visit when searching for neighbours (-1 for unlimited)
         (*this)["checks"] = checks;
         // search for eps-approximate neighbours (default: 0)
         (*this)["eps"] = eps;
         // only for radius search, require neighbours sorted by distance (default: true)
         (*this)["sorted"] = sorted;
-        // if false, search stops at the tree reaching the number of  max checks (original behavior).
-        // When true, we do a descent in each tree and. Like before the alternative paths
-        // stored in the heap are not be processed further when max checks is reached.
-        (*this)["explore_all_trees"] = explore_all_trees;
     }
 };
 
@@ -91,7 +75,7 @@ T get_param(const IndexParams& params, cv::String name)
         return it->second.cast<T>();
     }
     else {
-        FLANN_THROW(cv::Error::StsBadArg, cv::String("Missing parameter '")+name+cv::String("' in the parameters given"));
+        throw FLANNException(cv::String("Missing parameter '")+name+cv::String("' in the parameters given"));
     }
 }
 
@@ -111,6 +95,5 @@ inline void print_params(const IndexParams& params)
 
 }
 
-//! @endcond
 
 #endif /* OPENCV_FLANN_PARAMS_H_ */
